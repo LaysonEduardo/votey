@@ -2,20 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/utils/colors.dart';
+import 'package:votey/data/repositories/appwrite_repo.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-  SystemChrome.setSystemUIOverlayStyle(
-    const SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.transparent,
-    ),
-  );
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) async {
-    runApp(const MyApp());
-  });
+  await initUIservices();
+  await initCliServices();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -31,7 +25,18 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Nunito',
       ),
       getPages: AppPages.pages,
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.splash,
     );
   }
+}
+
+initUIservices() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      systemNavigationBarColor: Colors.transparent,
+    ),
+  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }

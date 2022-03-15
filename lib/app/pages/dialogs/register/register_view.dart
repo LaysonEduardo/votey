@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/pages/dialogs/register/register_controller.dart';
-import 'package:votey/app/utils/colors.dart';
 import 'package:votey/app/widgets/buttons.dart';
-
+import 'package:votey/app/widgets/custom_inputs.dart';
+import 'package:votey/app/widgets/loadings.dart';
 import '../../../widgets/custom_dialog.dart';
 
 class RegisterDialog extends GetView<RegisterController> {
@@ -12,129 +12,64 @@ class RegisterDialog extends GetView<RegisterController> {
   final controller = Get.put(RegisterController());
   @override
   Widget build(BuildContext context) {
-    return controller.registerState == RxStatus.loading()
-        ? const Center(
-            child: CircularProgressIndicator(),
-          )
-        : Form(
-            child: Column(
+    return controller.obx(
+      (state) => Form(
+        child: Column(
+          children: [
+            SimpleInput(
+              label: 'Seu nome',
+              icon: Icons.person,
+              currentText: controller.user.name,
+              onChaged: (str) {
+                controller.user.name = str;
+              },
+            ),
+            SimpleInput(
+              label: 'Email',
+              icon: Icons.person,
+              currentText: controller.user.email,
+              onChaged: (str) {
+                controller.user.email = str;
+              },
+            ),
+            PasswordInput(
+              onChaged: (str) {
+                controller.user.password = str;
+              },
+              currentText: controller.user.password,
+            ),
+            Row(
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  margin: const EdgeInsets.only(bottom: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: AppColors.secondaryLight,
-                      width: 1,
-                    ),
-                  ),
-                  child: TextFormField(
-                    cursorColor: AppColors.accent,
-                    decoration: InputDecoration(
-                      hintText: 'Seu nome',
-                      hintStyle: TextStyle(
-                        color: AppColors.secondaryLight,
-                      ),
-                      contentPadding: const EdgeInsets.all(10),
-                      icon: Icon(
-                        Icons.person,
-                        color: AppColors.secondaryLight,
-                      ),
-                      border: InputBorder.none,
-                    ),
-                    onChanged: (str) {
-                      controller.user.name = str;
-                    },
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  margin: const EdgeInsets.only(bottom: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: AppColors.secondaryLight,
-                      width: 1,
-                    ),
-                  ),
-                  child: TextFormField(
-                    cursorColor: AppColors.accent,
-                    decoration: InputDecoration(
-                      hintText: 'Email',
-                      hintStyle: TextStyle(
-                        color: AppColors.secondaryLight,
-                      ),
-                      contentPadding: const EdgeInsets.all(10),
-                      icon: Icon(
-                        Icons.alternate_email_rounded,
-                        color: AppColors.secondaryLight,
-                      ),
-                      border: InputBorder.none,
-                    ),
-                    onChanged: (str) {
-                      controller.user.email = str;
-                    },
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                      color: AppColors.secondaryLight,
-                      width: 1,
-                    ),
-                  ),
-                  child: TextFormField(
-                    cursorColor: AppColors.accent,
-                    decoration: InputDecoration(
-                      hintText: 'Senha',
-                      hintStyle: TextStyle(
-                        color: AppColors.secondaryLight,
-                      ),
-                      contentPadding: const EdgeInsets.all(10),
-                      icon: Icon(
-                        Icons.lock,
-                        color: AppColors.secondaryLight,
-                      ),
-                      border: InputBorder.none,
-                    ),
-                    onChanged: (str) {
-                      controller.user.password = str;
-                    },
-                  ),
-                ),
-                Row(
-                  children: [
-                    Obx(
-                      () {
-                        return Checkbox(
-                          value: controller.termsAccepted.value,
-                          onChanged: (value) {
-                            controller.termsAccepted.value = value!;
-                          },
-                          shape: const CircleBorder(),
-                        );
+                Obx(
+                  () {
+                    return Checkbox(
+                      value: controller.termsAccepted.value,
+                      onChanged: (value) {
+                        controller.termsAccepted.value = value!;
                       },
-                    ),
-                    const Text(
-                      'Aceitar termos e condições',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
+                      shape: const CircleBorder(),
+                    );
+                  },
                 ),
-                SimpleButton(
-                    text: 'Cadastrar',
-                    onPressed: () {
-                      controller.register();
-                    }),
+                const Text(
+                  'Eu aceito os termos e condições.',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
               ],
             ),
-          );
+            SimpleButton(
+                text: 'Cadastrar',
+                onPressed: () {
+                  controller.register();
+                }),
+          ],
+        ),
+      ),
+      onLoading: SimpleLoading(height: Get.height * 0.2),
+    );
   }
 }
 

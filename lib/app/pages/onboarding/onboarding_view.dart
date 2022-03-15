@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:votey/app/pages/dialogs/login/login_view.dart';
 import 'package:votey/app/pages/dialogs/register/register_view.dart';
 import 'package:votey/app/pages/onboarding/onboarding_controller.dart';
 import 'package:votey/app/utils/colors.dart';
@@ -51,7 +52,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const FlutterLogo(size: 100),
+                    const Hero(tag: 'logo', child: FlutterLogo(size: 100)),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                       child: Text(
@@ -62,7 +63,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                     ),
                     SimpleButton(
                       text: 'Entrar',
-                      onPressed: controller.loginButton,
+                      onPressed: () {
+                        loginDialog(context);
+                      },
                     ),
                     SimpleButton(
                       text: 'Cadastro',

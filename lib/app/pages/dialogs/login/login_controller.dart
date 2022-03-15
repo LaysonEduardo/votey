@@ -1,19 +1,12 @@
 import 'package:get/get.dart';
 import 'package:votey/app/widgets/snacksBar.dart';
+import 'package:votey/data/repositories/appwrite_repo.dart';
 import 'package:votey/domain/entities/user_register_model.dart';
 
-import '../../../../data/repositories/appwrite_repo.dart';
-
-class RegisterController extends GetxController with StateMixin {
+class LoginController extends GetxController with StateMixin {
   UserRegisterModel user = UserRegisterModel();
-  final termsAccepted = false.obs;
 
   validateForm() {
-    if (user.name.isEmpty) {
-      errorSnackBar('Seu nome não pode ser nulo');
-
-      return false;
-    }
     if (user.email.isEmpty || GetUtils.isEmail(user.email) == false) {
       errorSnackBar('Verifique seu Email e tente novamente');
 
@@ -24,25 +17,15 @@ class RegisterController extends GetxController with StateMixin {
 
       return false;
     }
-    if (user.password.length < 8) {
-      errorSnackBar('Essa senha é muito curta');
-
-      return false;
-    }
-    if (termsAccepted.value == false) {
-      errorSnackBar('Você precisa aceitar os termos e condições');
-
-      return false;
-    }
 
     return true;
   }
 
-  register() {
+  login() {
     Get.focusScope!.unfocus();
     if (validateForm() == true) {
       change([], status: RxStatus.loading());
-      Get.find<AppWriteCli>().createAccount(user);
+      Get.find<AppWriteCli>().logIn(user.email, user.password);
       Future.delayed(const Duration(seconds: 2), () {
         change([], status: RxStatus.success());
       });

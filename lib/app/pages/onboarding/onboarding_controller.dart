@@ -1,5 +1,3 @@
 import 'package:get/get.dart';
 
-class OnboardingController extends GetxController {
-  void loginButton() {}
-}
+class OnboardingController extends GetxController {}

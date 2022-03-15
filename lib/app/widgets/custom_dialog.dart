@@ -66,8 +66,9 @@ customDialog(
                 ),
                 Positioned(
                   top: 0,
-                  right: 0,
+                  right: 10,
                   child: IconButton(
+                    iconSize: 35,
                     onPressed: () {
                       Get.back();
                     },
