@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:votey/app/pages/dialogs/register/register_view.dart';
 import 'package:votey/app/pages/onboarding/onboarding_controller.dart';
 import 'package:votey/app/utils/colors.dart';
 import 'package:votey/app/utils/gradients.dart';
 import 'package:votey/app/utils/text_styles.dart';
+import 'package:votey/app/widgets/buttons.dart';
 
 class OnboardingPage extends GetView<OnboardingController> {
   const OnboardingPage({Key? key}) : super(key: key);
@@ -34,16 +36,12 @@ class OnboardingPage extends GetView<OnboardingController> {
                   },
                   blendMode: BlendMode.dstIn,
                   child: Image.asset(
-                    'assets/images/business_meet.jpg',
+                    'assets/images/onboarding_background.jpg',
                     fit: BoxFit.cover,
                   ),
                 ),
               ],
             ),
-          ),
-          const Align(
-            alignment: Alignment.center,
-            child: FlutterLogo(size: 100),
           ),
           SafeArea(
             child: Align(
@@ -53,34 +51,25 @@ class OnboardingPage extends GetView<OnboardingController> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    const FlutterLogo(size: 100),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                       child: Text(
-                        'Bem vindo ao Votey\numa plataforma para quem quer facilitar a tomada de decisão entre grupos.',
+                        'Bem vindo ao Votey\numa plataforma para quem quer facilitar a tomada de decisão entre grupos',
                         style: AppColors.isDark(Get.context!) ? AppFonts.commomDark : AppFonts.commomLight,
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    MaterialButton(
-                      color: AppColors.accent,
-                      shape: const StadiumBorder(),
+                    SimpleButton(
+                      text: 'Entrar',
                       onPressed: controller.loginButton,
-                      minWidth: Get.width * 0.4,
-                      child: Text(
-                        'Login',
-                        style: AppFonts.commom15Light,
-                      ),
                     ),
-                    MaterialButton(
-                      color: AppColors.accent,
-                      shape: const StadiumBorder(),
-                      onPressed: controller.registerButton,
-                      minWidth: Get.width * 0.4,
-                      child: Text(
-                        'Cadastro',
-                        style: AppFonts.commom15Light,
-                      ),
-                    ),
+                    SimpleButton(
+                      text: 'Cadastro',
+                      onPressed: () {
+                        registerDialog(context);
+                      },
+                    )
                   ],
                 ),
               ),

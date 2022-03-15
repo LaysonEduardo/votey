@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:votey/app/utils/colors.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
 
@@ -25,6 +26,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Votey',
       theme: ThemeData(
+        primaryColor: AppColors.secondaryLight,
+        toggleableActiveColor: AppColors.accent,
         fontFamily: 'Nunito',
       ),
       getPages: AppPages.pages,
