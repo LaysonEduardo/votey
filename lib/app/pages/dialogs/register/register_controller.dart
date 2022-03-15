@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:votey/app/widgets/snacksBar.dart';
 import 'package:votey/domain/entities/user_register_model.dart';
 
-import '../../../../data/repositories/appwrite_repo.dart';
+import '../../../../data/repositories/firebase_repo.dart';
 
 class RegisterController extends GetxController with StateMixin {
   UserRegisterModel user = UserRegisterModel();
@@ -24,11 +24,6 @@ class RegisterController extends GetxController with StateMixin {
 
       return false;
     }
-    if (user.password.length < 8) {
-      errorSnackBar('Essa senha é muito curta');
-
-      return false;
-    }
     if (termsAccepted.value == false) {
       errorSnackBar('Você precisa aceitar os termos e condições');
 
@@ -42,7 +37,7 @@ class RegisterController extends GetxController with StateMixin {
     Get.focusScope!.unfocus();
     if (validateForm() == true) {
       change([], status: RxStatus.loading());
-      Get.find<AppWriteCli>().createAccount(user);
+      Get.find<FirebaseCli>().createAccount(user);
       Future.delayed(const Duration(seconds: 2), () {
         change([], status: RxStatus.success());
       });

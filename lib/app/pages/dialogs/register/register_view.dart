@@ -46,6 +46,7 @@ class RegisterDialog extends GetView<RegisterController> {
                       value: controller.termsAccepted.value,
                       onChanged: (value) {
                         controller.termsAccepted.value = value!;
+                        controller.user.acceptedTerms = value;
                       },
                       shape: const CircleBorder(),
                     );

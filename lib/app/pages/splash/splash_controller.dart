@@ -1,5 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import 'package:votey/data/repositories/appwrite_repo.dart';
+import 'package:votey/data/repositories/firebase_repo.dart';
 import 'package:votey/device/repositories/device_actions_repo.dart';
 
 class SplashController extends GetxController {
@@ -7,8 +8,8 @@ class SplashController extends GetxController {
   SplashController({required this.deviceActions});
 
   @override
-  void onInit() {
-    Get.find<AppWriteCli>().getAccount();
+  void onInit() async {
+    await initCliServices();
     super.onInit();
   }
   //

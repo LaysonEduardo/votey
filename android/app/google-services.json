@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "582817006324",
+    "project_id": "voteyapp-2039a",
+    "storage_bucket": "voteyapp-2039a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582817006324:android:7fa0bc3103c00b293814a1",
+        "android_client_info": {
+          "package_name": "com.layson.votey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582817006324-epaaul38rq7naf4d8lg33glq8su4tm9e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbGxxXHJ2jeIyWmQuWROfVlKi2hSq03Ns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582817006324-epaaul38rq7naf4d8lg33glq8su4tm9e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/utils/colors.dart';
-import 'package:votey/data/repositories/appwrite_repo.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
 
 void main() async {
   await initUIservices();
-  await initCliServices();
+
   runApp(const MyApp());
 }
 

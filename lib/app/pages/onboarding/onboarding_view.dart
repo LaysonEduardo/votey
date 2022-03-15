@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:votey/app/pages/dialogs/login/login_view.dart';
 import 'package:votey/app/pages/dialogs/register/register_view.dart';
 import 'package:votey/app/pages/onboarding/onboarding_controller.dart';
-import 'package:votey/app/utils/colors.dart';
 import 'package:votey/app/utils/gradients.dart';
 import 'package:votey/app/utils/text_styles.dart';
 import 'package:votey/app/widgets/buttons.dart';
@@ -19,7 +18,7 @@ class OnboardingPage extends GetView<OnboardingController> {
             height: Get.height,
             width: Get.width,
             decoration: BoxDecoration(
-              gradient: AppColors.isDark(context) ? AppGradients.linearDark : AppGradients.linearLight,
+              gradient: AppGradients.linearDark,
             ),
           ),
           SizedBox(
@@ -57,7 +56,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                       child: Text(
                         'Bem vindo ao Votey\numa plataforma para quem quer facilitar a tomada de decisão entre grupos',
-                        style: AppColors.isDark(Get.context!) ? AppFonts.commomDark : AppFonts.commomLight,
+                        style: AppFonts.commomDark,
                         textAlign: TextAlign.center,
                       ),
                     ),

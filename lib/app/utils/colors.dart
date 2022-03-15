@@ -9,11 +9,11 @@ class AppColors {
   static Color primaryDark = const Color(0xff373F51);
   static Color secondaryDark = const Color(0xff1B1B1E);
   //
-  static isDark(BuildContext context) {
-    if (MediaQuery.of(context).platformBrightness == Brightness.dark) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  // static isDark(BuildContext context) {
+  //   if (MediaQuery.of(context).platformBrightness == Brightness.dark) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
 }

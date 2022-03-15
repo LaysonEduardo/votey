@@ -26,7 +26,7 @@ customDialog(
           filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.isDark(context) ? AppColors.primaryDark.withOpacity(0.9) : AppColors.primaryLight.withOpacity(0.9),
+              color: AppColors.primaryDark.withOpacity(0.9),
               borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
             ),
             width: MediaQuery.of(context).size.width,

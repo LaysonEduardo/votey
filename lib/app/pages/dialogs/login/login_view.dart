@@ -29,7 +29,7 @@ class LoginDialog extends GetView<LoginController> {
             },
             currentText: controller.user.password,
           ),
-          Text('Esqueci a senha'),
+          const Text('Esqueci a senha'),
           SimpleButton(
             text: 'Entrar',
             onPressed: () {

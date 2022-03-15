@@ -9,12 +9,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-  appwrite: ^4.0.1
   get: ^4.6.1
   carousel_slider: ^4.0.0
   shared_preferences: ^2.0.13
   rive: ^0.8.1
   uuid: ^3.0.6
+  firebase_core: ^1.13.1
+  firebase_auth: ^3.3.11
+  cloud_firestore: ^3.1.10
 
 dev_dependencies:
   flutter_test:
