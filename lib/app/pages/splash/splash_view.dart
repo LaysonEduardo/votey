@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/pages/splash/splash_controller.dart';
 import 'package:votey/app/utils/gradients.dart';
@@ -20,11 +21,8 @@ class SplashView extends GetView<SplashController> {
           Center(
             child: SimpleLoading(height: 250),
           ),
-          const Center(
-            child: Hero(
-              tag: 'logo',
-              child: FlutterLogo(size: 100),
-            ),
+          Center(
+            child: SvgPicture.asset('assets/images/logo_simple_dark.svg', width: Get.width * 0.2),
           )
         ],
       ),

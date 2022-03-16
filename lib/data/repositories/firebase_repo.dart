@@ -5,9 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/widgets/snacksBar.dart';
-
 import 'package:votey/domain/entities/user_register_model.dart';
-
 import '../../app/routes/app_routes.dart';
 
 class FirebaseCli extends GetxService {
@@ -84,10 +82,6 @@ class FirebaseCli extends GetxService {
         Get.offAllNamed(AppRoutes.home);
       }
     });
-  }
-
-  fetchUser() {
-    users.doc(auth.currentUser?.uid).get();
   }
 
   firestoreAddUser(UserRegisterModel user) {

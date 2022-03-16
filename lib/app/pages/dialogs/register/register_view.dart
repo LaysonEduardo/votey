@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/pages/dialogs/register/register_controller.dart';
+import 'package:votey/app/utils/colors.dart';
 import 'package:votey/app/widgets/buttons.dart';
 import 'package:votey/app/widgets/custom_inputs.dart';
 import 'package:votey/app/widgets/loadings.dart';
@@ -48,6 +49,7 @@ class RegisterDialog extends GetView<RegisterController> {
                         controller.termsAccepted.value = value!;
                         controller.user.acceptedTerms = value;
                       },
+                      fillColor: MaterialStateProperty.all(AppColors.secondaryLight),
                       shape: const CircleBorder(),
                     );
                   },

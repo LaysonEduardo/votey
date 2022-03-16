@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:votey/app/pages/home/home_module.dart';
 import 'package:votey/app/pages/onboarding/onboarding_module.dart';
+import 'package:votey/app/pages/settings/settings_module.dart';
+import 'package:votey/app/pages/settings/settings_view.dart';
 import 'package:votey/app/pages/splash/splash_module.dart';
 import 'package:votey/app/pages/splash/splash_view.dart';
 import '../pages/home/home_view.dart';
@@ -16,14 +18,20 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.home,
-      page: () => HomePage(),
+      page: () => HomeView(),
       binding: HomeModule(),
     ),
     GetPage(
       name: AppRoutes.onboarding,
-      page: () => const OnboardingPage(),
+      page: () => const OnboardingView(),
       binding: OnboardingModule(),
-      transition: Transition.fade,
     ),
+    //gerenrate getpage settings
+    GetPage(
+      name: AppRoutes.settings,
+      page: () => const SettingsView(),
+      binding: SettingsModule(),
+      transition: Transition.native,
+    )
   ];
 }

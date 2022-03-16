@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/pages/dialogs/login/login_view.dart';
 import 'package:votey/app/pages/dialogs/register/register_view.dart';
@@ -7,8 +8,8 @@ import 'package:votey/app/utils/gradients.dart';
 import 'package:votey/app/utils/text_styles.dart';
 import 'package:votey/app/widgets/buttons.dart';
 
-class OnboardingPage extends GetView<OnboardingController> {
-  const OnboardingPage({Key? key}) : super(key: key);
+class OnboardingView extends GetView<OnboardingController> {
+  const OnboardingView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +52,7 @@ class OnboardingPage extends GetView<OnboardingController> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Hero(tag: 'logo', child: FlutterLogo(size: 100)),
+                    SvgPicture.asset('assets/images/logo_dark.svg', width: Get.width * 0.5),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                       child: Text(
