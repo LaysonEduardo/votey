@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/pages/dialogs/register/register_controller.dart';
-import 'package:votey/app/utils/colors.dart';
 import 'package:votey/app/widgets/buttons.dart';
 import 'package:votey/app/widgets/custom_inputs.dart';
 import 'package:votey/app/widgets/loadings.dart';
@@ -27,7 +26,7 @@ class RegisterDialog extends GetView<RegisterController> {
             ),
             SimpleInput(
               label: 'Email',
-              icon: Icons.person,
+              icon: Icons.mail,
               currentText: controller.user.email,
               onChaged: (str) {
                 controller.user.email = str;
@@ -40,18 +39,13 @@ class RegisterDialog extends GetView<RegisterController> {
               currentText: controller.user.password,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Obx(
-                  () {
-                    return Checkbox(
-                      value: controller.termsAccepted.value,
-                      onChanged: (value) {
-                        controller.termsAccepted.value = value!;
-                        controller.user.acceptedTerms = value;
-                      },
-                      fillColor: MaterialStateProperty.all(AppColors.secondaryLight),
-                      shape: const CircleBorder(),
-                    );
+                CustomRadioButton(
+                  value: controller.termsAccepted.value,
+                  onTap: (value) {
+                    controller.termsAccepted.value = value!;
+                    controller.user.acceptedTerms = value;
                   },
                 ),
                 const Text(

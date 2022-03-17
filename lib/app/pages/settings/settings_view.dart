@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:votey/app/pages/dialogs/profile/profile_view.dart';
 import 'package:votey/app/pages/settings/settings_controller.dart';
 import 'package:votey/app/utils/colors.dart';
 import 'package:votey/app/utils/gradients.dart';
@@ -42,8 +43,7 @@ class SettingsView extends GetView<SettingsController> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: CircleAvatar(
-                            backgroundColor: AppColors.secondaryLight,
-                            foregroundColor: AppColors.primaryDark.withOpacity(0.5),
+                            backgroundColor: AppColors.accent,
                             radius: 30,
                             child: const Icon(
                               Icons.person,
@@ -67,18 +67,14 @@ class SettingsView extends GetView<SettingsController> {
                           ),
                         ],
                       ),
-                      action: IconButton(
-                        color: AppColors.secondaryLight,
-                        onPressed: controller.logout,
-                        icon: const Icon(Icons.settings),
-                      ),
+                      action: Container(),
                     ),
                     SimpleMenuButton(
                       leading: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Icon(
-                          Icons.manage_accounts_rounded,
-                          color: AppColors.secondaryLight,
+                          Icons.account_circle,
+                          color: AppColors.accent,
                           size: 30,
                         ),
                       ),
@@ -88,16 +84,17 @@ class SettingsView extends GetView<SettingsController> {
                       ),
                       action: IconButton(
                         color: AppColors.secondaryLight,
-                        onPressed: controller.logout,
+                        onPressed: profileDialog,
                         icon: const Icon(Icons.chevron_right_rounded),
                       ),
+                      onPressed: profileDialog,
                     ),
                     SimpleMenuButton(
                       leading: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Icon(
                           Icons.history,
-                          color: AppColors.secondaryLight,
+                          color: AppColors.accent,
                           size: 30,
                         ),
                       ),
@@ -116,7 +113,7 @@ class SettingsView extends GetView<SettingsController> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Icon(
                           Icons.notifications_rounded,
-                          color: AppColors.secondaryLight,
+                          color: AppColors.accent,
                           size: 30,
                         ),
                       ),
@@ -135,7 +132,7 @@ class SettingsView extends GetView<SettingsController> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Icon(
                           Icons.question_answer_rounded,
-                          color: AppColors.secondaryLight,
+                          color: AppColors.accent,
                           size: 30,
                         ),
                       ),
@@ -154,7 +151,7 @@ class SettingsView extends GetView<SettingsController> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Icon(
                           Icons.help_outline_rounded,
-                          color: AppColors.secondaryLight,
+                          color: AppColors.accent,
                           size: 30,
                         ),
                       ),
@@ -176,7 +173,7 @@ class SettingsView extends GetView<SettingsController> {
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Icon(
                     Icons.logout_rounded,
-                    color: AppColors.secondaryLight,
+                    color: AppColors.accent,
                     size: 30,
                   ),
                 ),

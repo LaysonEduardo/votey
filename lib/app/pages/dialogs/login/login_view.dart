@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/pages/dialogs/login/login_controller.dart';
+import 'package:votey/app/utils/colors.dart';
 import 'package:votey/app/widgets/buttons.dart';
 import 'package:votey/app/widgets/custom_inputs.dart';
 import 'package:votey/app/widgets/loadings.dart';
@@ -29,7 +30,10 @@ class LoginDialog extends GetView<LoginController> {
             },
             currentText: controller.user.password,
           ),
-          const Text('Esqueci a senha'),
+          Text(
+            'Esqueci a senha',
+            style: TextStyle(color: AppColors.secondaryLight, fontSize: 15, fontWeight: FontWeight.w600),
+          ),
           SimpleButton(
             text: 'Entrar',
             onPressed: () {
