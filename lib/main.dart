@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/utils/colors.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
 
 void main() async {
-  await initUIservices().then((value) {
-    runApp(const MyApp());
-  });
+  await initUIservices();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -39,5 +37,4 @@ Future<void> initUIservices() async {
     ),
   );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  FlutterNativeSplash.remove();
 }

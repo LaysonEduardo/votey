@@ -41,13 +41,14 @@ class RegisterDialog extends GetView<RegisterController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomRadioButton(
-                  value: controller.termsAccepted.value,
-                  onTap: (value) {
-                    controller.termsAccepted.value = value!;
-                    controller.user.acceptedTerms = value;
-                  },
-                ),
+                Obx(() {
+                  return CustomRadioButton(
+                    value: controller.termsAccepted.value,
+                    onTap: () {
+                      controller.termsAccepted.value = !controller.termsAccepted.value;
+                    },
+                  );
+                }),
                 const Text(
                   'Eu aceito os termos e condições.',
                   style: TextStyle(

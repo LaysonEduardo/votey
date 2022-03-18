@@ -1,8 +1,12 @@
 // ignore_for_file: unused_catch_clause
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,14 +19,44 @@ class FirebaseCli extends GetxService {
   late FirebaseAuth auth;
   late FirebaseFirestore firestore;
   late CollectionReference users;
+  late FirebaseRemoteConfig firebaseRemoteConfig;
+  late FirebaseAnalytics analytics;
+  late FirebaseMessaging messaging;
+  late NotificationSettings settings;
 
   @override
   void onInit() async {
     defaultApp = await Firebase.initializeApp();
     auth = FirebaseAuth.instance;
+    messaging = FirebaseMessaging.instance;
     firestore = FirebaseFirestore.instance;
+    analytics = FirebaseAnalytics.instance;
+    settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
     users = FirebaseFirestore.instance.collection('users');
+
+    // firebaseRemoteConfig = FirebaseRemoteConfig.instance;
+    // await firebaseRemoteConfig.setConfigSettings(RemoteConfigSettings(
+    //   fetchTimeout: Duration(seconds: 10),
+    //   minimumFetchInterval: Duration(seconds: 10),
+    // ));
+    // await firebaseRemoteConfig.fetchAndActivate();
+    // users = FirebaseFirestore.instance.collection('users');
+    // firebaseRemoteConfig.setDefaults(<String, dynamic>{
+    //   'welcome_message': 'Bem vindo ao Votey\numa plataforma para quem quer facilitar a tomada de decisão entre grupos',
+    //   'feat1_enabled': false,
+    // });
+    String? test = await messaging.getToken();
+    print(test);
     getAccount();
+    listenNotificationForeground();
     super.onInit();
   }
 
@@ -34,7 +68,8 @@ class FirebaseCli extends GetxService {
         password: user.password,
       )
           .then(
-        (value) {
+        (value) async {
+          await analytics.logSignUp(signUpMethod: 'email');
           firestoreAddUser(user);
           Get.offAllNamed(AppRoutes.home);
         },
@@ -46,6 +81,7 @@ class FirebaseCli extends GetxService {
         errorSnackBar('Email ja cadastrado, tente outro');
       }
     } catch (e) {
+      print(e);
       errorSnackBar('Erro desconhecido, tente novamente mais tarde');
     }
   }
@@ -107,8 +143,31 @@ class FirebaseCli extends GetxService {
   }
 }
 
+listenNotificationForeground() {
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    if (message.notification != null) {
+      AwesomeNotifications().createNotification(
+          content: NotificationContent(
+        id: 10,
+        channelKey: 'basic_channel',
+        title: message.notification!.title,
+        body: message.notification!.body,
+      ));
+    }
+  });
+}
+
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+
+  print('Handling a background message: ${message.notification!.title}');
+}
+
 initCliServices() async {
   debugPrint('starting Firebase Services...');
   await Get.putAsync<FirebaseCli>(() async => FirebaseCli());
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   debugPrint('All Firebase services started');
 }

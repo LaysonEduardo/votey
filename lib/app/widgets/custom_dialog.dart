@@ -72,7 +72,7 @@ customDialog(
                     onPressed: () {
                       Get.back();
                     },
-                    icon: Icon(Icons.close, color: Colors.red[500]),
+                    icon: Icon(Icons.close_rounded, color: Colors.red[500]),
                   ),
                 )
               ],

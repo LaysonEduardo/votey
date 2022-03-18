@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
+import 'package:votey/app/pages/camera/camera_module.dart';
 import 'package:votey/app/pages/home/home_module.dart';
 import 'package:votey/app/pages/onboarding/onboarding_module.dart';
 import 'package:votey/app/pages/settings/settings_module.dart';
 import 'package:votey/app/pages/settings/settings_view.dart';
 import 'package:votey/app/pages/splash/splash_module.dart';
 import 'package:votey/app/pages/splash/splash_view.dart';
+import '../pages/camera/camera_view.dart';
 import '../pages/home/home_view.dart';
 import '../pages/onboarding/onboarding_view.dart';
 import 'app_routes.dart';
@@ -26,12 +28,17 @@ abstract class AppPages {
       page: () => const OnboardingView(),
       binding: OnboardingModule(),
     ),
-    //gerenrate getpage settings
     GetPage(
       name: AppRoutes.settings,
       page: () => const SettingsView(),
       binding: SettingsModule(),
       transition: Transition.native,
-    )
+    ),
+    GetPage(
+      name: AppRoutes.camera,
+      page: () => const CameraView(),
+      binding: CameraModule(),
+      transition: Transition.native,
+    ),
   ];
 }
