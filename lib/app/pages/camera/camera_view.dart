@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:votey/app/pages/camera/camera_controller.dart';
 import 'package:votey/app/utils/colors.dart';
