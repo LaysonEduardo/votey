@@ -7,12 +7,7 @@ class CameraPageController extends GetxController with StateMixin {
 
   @override
   void onInit() async {
-    change([], status: RxStatus.loading());
-    cameras = await availableCameras();
-    controller = CameraController(cameras[1], ResolutionPreset.ultraHigh);
-    await controller.initialize().then((value) {
-      change([], status: RxStatus.success());
-    });
+    await initCamera();
     super.onInit();
   }
 
@@ -20,5 +15,29 @@ class CameraPageController extends GetxController with StateMixin {
   void onClose() {
     controller.dispose();
     super.onClose();
+  }
+
+  initCamera() async {
+    change([], status: RxStatus.loading());
+    cameras = await availableCameras();
+    controller = CameraController(cameras[1], ResolutionPreset.ultraHigh);
+    await controller.initialize().then((value) {
+      change([], status: RxStatus.success());
+    });
+  }
+
+  takePicture() async {
+    await controller.takePicture().then((value) {
+      Get.snackbar('Picture Taken', 'Picture Taken');
+    });
+  }
+
+  turnFlash() {}
+  changeCamera() {
+    controller.dispose();
+    controller = CameraController(cameras[0], ResolutionPreset.ultraHigh);
+    controller.initialize().then((value) {
+      controller.startImageStream((CameraImage image) {});
+    });
   }
 }
