@@ -20,7 +20,9 @@ class SettingsController extends GetxController {
           ),
           SimpleButton(
             text: 'Sim',
-            onPressed: Get.find<FirebaseCli>().logOut,
+            onPressed: () {
+              //  Get.find<FirebaseCli>().logOut
+            },
           ),
         ],
       ),

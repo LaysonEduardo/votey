@@ -25,7 +25,7 @@ class LoginController extends GetxController with StateMixin {
     Get.focusScope!.unfocus();
     if (validateForm() == true) {
       change([], status: RxStatus.loading());
-      Get.find<FirebaseCli>().logIn(user.email, user.password);
+      // Get.find<FirebaseCli>().logIn(user.email, user.password);
       Future.delayed(const Duration(seconds: 2), () {
         change([], status: RxStatus.success());
       });
