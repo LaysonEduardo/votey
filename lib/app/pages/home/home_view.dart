@@ -4,6 +4,7 @@ import 'package:votey/app/pages/home/home_controller.dart';
 import 'package:votey/app/routes/app_routes.dart';
 import 'package:votey/app/utils/colors.dart';
 import 'package:votey/app/utils/gradients.dart';
+import 'package:votey/app/widgets/custom_appbar.dart';
 
 // ignore: use_key_in_widget_constructors
 class HomeView extends GetView<HomeController> {
@@ -48,6 +49,7 @@ class HomeView extends GetView<HomeController> {
           children: [],
         ),
       ),
+      bottomNavigationBar: CustomAppBar(),
     );
   }
 }

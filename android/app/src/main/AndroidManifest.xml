@@ -35,10 +35,20 @@
             android:name="flutterEmbedding"
             android:value="2" 
         />
+        <activity
+        android:name="com.linusu.flutter_web_auth.CallbackActivity"
+        android:exported="true">
+            <intent-filter android:label="flutter_web_auth">
+              <action android:name="android.intent.action.VIEW" />
+              <category android:name="android.intent.category.DEFAULT" />
+              <category android:name="android.intent.category.BROWSABLE" />
+              <data android:scheme="appwrite-callback-622e4d09dd1a4829385e" />
+            </intent-filter>
+        </activity>
         <service
             android:name="com.layson.votey.ForegroundService"        
-            android:exported="false"
-            android:stopWithTask="false"/>    
+            android:stopWithTask="false"
+            />    
     </application>
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 </manifest>

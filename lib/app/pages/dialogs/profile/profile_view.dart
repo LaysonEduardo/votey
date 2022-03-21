@@ -41,7 +41,7 @@ class ProfileDialog extends GetView<ProfileController> {
           ),
         ),
         Text(
-          'UserName',
+          'User Name',
           style: TextStyle(
             fontSize: 25,
             fontWeight: FontWeight.bold,
@@ -115,7 +115,7 @@ class ProfileDialog extends GetView<ProfileController> {
             ),
           ),
           body: Text(
-            'UserName',
+            'User Name',
             style: TextStyle(fontSize: 20, color: AppColors.secondaryLight, fontWeight: FontWeight.bold),
           ),
           action: IconButton(

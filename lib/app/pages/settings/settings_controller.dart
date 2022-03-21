@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:votey/app/utils/colors.dart';
 import 'package:votey/app/widgets/buttons.dart';
 import 'package:votey/app/widgets/custom_dialog.dart';
-
-import '../../../data/repositories/firebase_repo.dart';
+import 'package:votey/data/repositories/appwrite_repo.dart';
 
 class SettingsController extends GetxController {
   logout() {
@@ -20,7 +19,9 @@ class SettingsController extends GetxController {
           ),
           SimpleButton(
             text: 'Sim',
-            onPressed: Get.find<FirebaseCli>().logOut,
+            onPressed: () {
+              Get.find<AppWriteCli>().logOut();
+            },
           ),
         ],
       ),

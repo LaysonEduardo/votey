@@ -37,7 +37,7 @@ class RegisterController extends GetxController with StateMixin {
     Get.focusScope!.unfocus();
     if (validateForm() == true) {
       change([], status: RxStatus.loading());
-      await Get.find<FirebaseCli>().createAccount(user);
+      // await Get.find<FirebaseCli>().createAccount(user);
       Future.delayed(const Duration(seconds: 2), () {
         change([], status: RxStatus.success());
       });

@@ -1,24 +1,21 @@
 // ignore_for_file: unused_catch_clause
 
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:votey/app/widgets/snacksBar.dart';
 import 'package:votey/domain/entities/user_register_model.dart';
 import '../../app/routes/app_routes.dart';
 
 class FirebaseCli extends GetxService {
   late FirebaseApp defaultApp;
-  late FirebaseAuth auth;
-  late FirebaseFirestore firestore;
-  late CollectionReference users;
+  // late FirebaseAuth auth;
+  // late FirebaseFirestore firestore;
+  // late CollectionReference users;
   late FirebaseRemoteConfig firebaseRemoteConfig;
   late FirebaseAnalytics analytics;
   late FirebaseMessaging messaging;
@@ -27,9 +24,9 @@ class FirebaseCli extends GetxService {
   @override
   void onInit() async {
     defaultApp = await Firebase.initializeApp();
-    auth = FirebaseAuth.instance;
+    // auth = FirebaseAuth.instance;
     messaging = FirebaseMessaging.instance;
-    firestore = FirebaseFirestore.instance;
+    // firestore = FirebaseFirestore.instance;
     analytics = FirebaseAnalytics.instance;
     settings = await messaging.requestPermission(
       alert: true,
@@ -40,7 +37,7 @@ class FirebaseCli extends GetxService {
       provisional: false,
       sound: true,
     );
-    users = FirebaseFirestore.instance.collection('users');
+    // users = FirebaseFirestore.instance.collection('users');
 
     // firebaseRemoteConfig = FirebaseRemoteConfig.instance;
     // await firebaseRemoteConfig.setConfigSettings(RemoteConfigSettings(
@@ -55,92 +52,92 @@ class FirebaseCli extends GetxService {
     // });
     String? test = await messaging.getToken();
     print(test);
-    getAccount();
+    // getAccount();
     listenNotificationForeground();
     super.onInit();
   }
 
-  createAccount(UserRegisterModel user) async {
-    try {
-      await auth
-          .createUserWithEmailAndPassword(
-        email: user.email,
-        password: user.password,
-      )
-          .then(
-        (value) async {
-          await analytics.logSignUp(signUpMethod: 'email');
-          firestoreAddUser(user);
-          Get.offAllNamed(AppRoutes.home);
-        },
-      );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        errorSnackBar('Essa senha é muito curta');
-      } else if (e.code == 'email-already-in-use') {
-        errorSnackBar('Email ja cadastrado, tente outro');
-      }
-    } catch (e) {
-      print(e);
-      errorSnackBar('Erro desconhecido, tente novamente mais tarde');
-    }
-  }
+  // createAccount(UserRegisterModel user) async {
+  //   try {
+  //     await auth
+  //         .createUserWithEmailAndPassword(
+  //       email: user.email,
+  //       password: user.password,
+  //     )
+  //         .then(
+  //       (value) async {
+  //         await analytics.logSignUp(signUpMethod: 'email');
+  //         firestoreAddUser(user);
+  //         Get.offAllNamed(AppRoutes.home);
+  //       },
+  //     );
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'weak-password') {
+  //       errorSnackBar('Essa senha é muito curta');
+  //     } else if (e.code == 'email-already-in-use') {
+  //       errorSnackBar('Email ja cadastrado, tente outro');
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //     errorSnackBar('Erro desconhecido, tente novamente mais tarde');
+  //   }
+  // }
 
-  logIn(String email, String password) async {
-    try {
-      await auth.signInWithEmailAndPassword(email: email, password: password).then((value) {
-        Get.offAllNamed(AppRoutes.home);
-        updateLastLogin();
-      });
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        errorSnackBar('Credenciais não existentes');
-      } else if (e.code == 'wrong-password') {
-        errorSnackBar('Uma ou mais credenciais estão incorretas');
-      }
-    }
-  }
+  // logIn(String email, String password) async {
+  //   try {
+  //     await auth.signInWithEmailAndPassword(email: email, password: password).then((value) {
+  //       Get.offAllNamed(AppRoutes.home);
+  //       updateLastLogin();
+  //     });
+  //   } on FirebaseAuthException catch (e) {
+  //     if (e.code == 'user-not-found') {
+  //       errorSnackBar('Credenciais não existentes');
+  //     } else if (e.code == 'wrong-password') {
+  //       errorSnackBar('Uma ou mais credenciais estão incorretas');
+  //     }
+  //   }
+  // }
 
-  logOut() async {
-    try {
-      await auth.signOut().then((value) => {
-            Get.offAllNamed(AppRoutes.onboarding),
-          });
-    } on FirebaseAuthException catch (e) {
-      errorSnackBar('Erro desconhecimento, tente novamente mais tarde');
-    }
-  }
+  // logOut() async {
+  //   try {
+  //     await auth.signOut().then((value) => {
+  //           Get.offAllNamed(AppRoutes.onboarding),
+  //         });
+  //   } on FirebaseAuthException catch (e) {
+  //     errorSnackBar('Erro desconhecimento, tente novamente mais tarde');
+  //   }
+  // }
 
-  getAccount() async {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      Get.offAllNamed(AppRoutes.onboarding);
-      if (auth.currentUser == null) {
-        Get.offAllNamed(AppRoutes.onboarding);
-      } else {
-        Get.offAllNamed(AppRoutes.home);
-      }
-    });
-  }
+  // getAccount() async {
+  //   WidgetsBinding.instance!.addPostFrameCallback((_) {
+  //     Get.offAllNamed(AppRoutes.onboarding);
+  //     if (auth.currentUser == null) {
+  //       Get.offAllNamed(AppRoutes.onboarding);
+  //     } else {
+  //       Get.offAllNamed(AppRoutes.home);
+  //     }
+  //   });
+  // }
 
-  firestoreAddUser(UserRegisterModel user) {
-    users.doc(auth.currentUser!.uid).set(
-      {
-        'user_name': user.name,
-        'email': user.email,
-        'accepted_terms': user.acceptedTerms,
-        'last_login': DateTime.now(),
-        'isPremium': false,
-      },
-    );
-  }
+  // firestoreAddUser(UserRegisterModel user) {
+  //   users.doc(auth.currentUser!.uid).set(
+  //     {
+  //       'user_name': user.name,
+  //       'email': user.email,
+  //       'accepted_terms': user.acceptedTerms,
+  //       'last_login': DateTime.now(),
+  //       'isPremium': false,
+  //     },
+  //   );
+  // }
 
-  updateLastLogin() {
-    users.doc(auth.currentUser!.uid).update(
-      {
-        'last_login': DateTime.now(),
-      },
-    );
-  }
+  // updateLastLogin() {
+  //   users.doc(auth.currentUser!.uid).update(
+  //     {
+  //       'last_login': DateTime.now(),
+  //     },
+  //   );
+  // }
 }
 
 listenNotificationForeground() {
