@@ -1,19 +1,28 @@
 // ignore_for_file: must_be_immutable
 
-class UserInfoModel {
+import 'package:equatable/equatable.dart';
+
+class UserInfoModel extends Equatable {
+  String? avatar;
   String name;
-  bool isPremium;
+  String email;
+  String createdAt;
+  bool confirmedEmail;
+
   UserInfoModel({
+    this.avatar,
     this.name = '',
-    this.isPremium = false,
+    this.email = '',
+    this.createdAt = '',
+    this.confirmedEmail = false,
   });
-  UserInfoModel copyWith({
-    String? name,
-    bool? isPremium,
-  }) {
-    return UserInfoModel(
-      name: name ?? this.name,
-      isPremium: isPremium ?? this.isPremium,
-    );
-  }
+
+  @override
+  List<Object?> get props => [
+        avatar,
+        name,
+        email,
+        createdAt,
+        confirmedEmail,
+      ];
 }

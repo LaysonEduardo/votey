@@ -7,13 +7,19 @@ import 'package:votey/app/widgets/snacksBar.dart';
 class AppWriteCli extends GetxService {
   Client client = Client();
   late Account account;
+  late Storage storage;
 
   @override
   void onInit() {
-    client.setEndpoint('https://192.168.1.66:443/v1').setProject('622e4d09dd1a4829385e').setSelfSigned(status: true);
-    account = Account(client);
+    init();
     checkSession();
     super.onInit();
+  }
+
+  init() {
+    client.setEndpoint('https://192.168.1.66:443/v1').setProject('622e4d09dd1a4829385e').setSelfSigned(status: true);
+    account = Account(client);
+    storage = Storage(client);
   }
 
   logIn(String email, String password) async {
