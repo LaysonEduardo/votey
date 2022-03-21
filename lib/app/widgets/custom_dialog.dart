@@ -69,10 +69,8 @@ customDialog(
                   right: 10,
                   child: IconButton(
                     iconSize: 35,
-                    onPressed: () {
-                      Get.back();
-                    },
-                    icon: Icon(Icons.close_rounded, color: Colors.red[500]),
+                    onPressed: Get.back,
+                    icon: Icon(Icons.close_rounded, color: AppColors.primaryLight),
                   ),
                 )
               ],
@@ -87,8 +85,5 @@ customDialog(
         child: child,
       );
     },
-    // builder: (builder) {
-
-    // },
   );
 }
